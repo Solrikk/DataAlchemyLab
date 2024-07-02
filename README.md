@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/Solrikk/DataAlchemyLab/blob/main/assets/images/techny-machine-vision-icon.png" alt="Logo" />
+  <img src="https://github.com/Solrikk/DataLab/blob/main/assets/images/flame-working-with-data.png" alt="Logo" />
 </div>
 
 <div align="center">
