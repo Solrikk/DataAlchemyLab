@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+    <title>Magic_XML</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript" >
+     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+     m[i].l=1*new Date();
+     for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+     k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+     (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+     ym(96422591, "init", {
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true,
+          webvisor:true
+     });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/96422591" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+    
+    <script src="/static/js/main.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="user-panel">
+            <a href="https://xmlmagic.ru/">Главная</a>
+            <a href="Contact/contact.html">Контакты</a>
+            <a href="API.html">API</a>
+            <a href="Converter/converter.html">Конвертер</a>
+            <a href="Download.html">Скачать</a>
+        </div>
+    </header>
+
+    <h1>Вставьте ссылку:</h1>
+    <form id="linkForm">
+        <label for="linkUrl">URL-ссылка:</label>
+        <input type="text" id="linkUrl" name="linkUrl" required>
+        <button type="submit">Обработать</button>
+    </form>
+
+    <div id="processingDiv" style="display: none;">
+        Идет обработка...
+    </div>
+    
+    <div id="resultDiv"></div>
+    <a href="#" id="downloadLink" style="display: none;">Скачать CSV</a>
+    <button id="anotherProcessButton" style="display: none;" onclick="resetForm()">Обработать ещё</button>
+    
+    <p id="contactInfo">Если у вас возникнут проблемы, свяжитесь со мной по адресу: reveni324@gmail.com</p>
+</body>
+</html>
