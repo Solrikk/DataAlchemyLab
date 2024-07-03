@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/Solrikk/DataLab/blob/main/assets/images/flame-working-with-data.png" alt="Logo" />
+  <img src="https://github.com/Solrikk/DataLab/blob/main/assets/gif/3d-techny-business-analytics-on-tablet-screen.gif" alt="Logo" />
 </div>
 
 <div align="center">
