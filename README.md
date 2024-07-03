@@ -38,6 +38,12 @@ I have compiled various applications and scripts in Python, C#, and Go that use 
 - **Entity Framework Core**: An ORM for C# that provides a high-level API for working with databases.
 - **CsvHelper**: A library for reading and writing CSV files.
 
+### Web Scraping 🌐:
+- **BeautifulSoup** (Python): A library for parsing HTML and XML documents, and extracting data from them.
+- **Scrapy** (Python): An open-source and collaborative web crawling framework for Python.
+- **HtmlAgilityPack** (C#): A library for parsing HTML in a .NET application.
+- **GoQuery** (Go): A library that brings a syntax and feature set inspired by jQuery to Go for HTML parsing and web scraping.
+
 ### Cryptography 🔒:
 - **PyCryptodome** (Python): A self-contained Python package of low-level cryptographic primitives.
 - **BouncyCastle** (C#): A library offering cryptographic APIs that can be used to perform cryptographic computations.
