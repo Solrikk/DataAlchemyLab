@@ -1,6 +1,8 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import chardet
+from tkinter import Tk, filedialog
+import os
 
 
 def detect_encoding(file_path):
@@ -9,23 +11,36 @@ def detect_encoding(file_path):
     return result['encoding']
 
 
-kaminopt_encoding = detect_encoding('kaminopt.csv')
-features_encoding = detect_encoding('features.csv')
+def select_file(title):
+  root = Tk()
+  root.withdraw()
+  file_path = filedialog.askopenfilename(title=title,
+                                         filetypes=[("CSV files", "*.csv")])
+  root.destroy()
+  return file_path
 
-kaminopt_df = pd.read_csv('kaminopt.csv',
-                          delimiter=';',
-                          encoding=kaminopt_encoding,
-                          low_memory=False)
-features_df = pd.read_csv('features.csv',
+
+data_file_path = select_file('Select the main CSV file for processing')
+features_file_path = select_file('Select the file with columns to exclude')
+
+data_file_encoding = detect_encoding(data_file_path)
+features_encoding = detect_encoding(features_file_path)
+
+data_df = pd.read_csv(data_file_path,
+                      delimiter=';',
+                      encoding=data_file_encoding,
+                      low_memory=False)
+features_df = pd.read_csv(features_file_path,
                           delimiter=';',
                           encoding=features_encoding)
 
 columns_to_exclude = features_df.iloc[:, 0].tolist()
 columns_to_include = [
-    col for col in kaminopt_df.columns if col not in columns_to_exclude
+    col for col in data_df.columns
+    if col not in columns_to_exclude and col != 'description'
 ]
 
-kaminopt_df.fillna('', inplace=True)
+data_df.fillna('', inplace=True)
 
 
 def combine_columns(dataframe, columns):
@@ -37,24 +52,26 @@ def combine_columns(dataframe, columns):
       if pd.notna(value) and value != '':
         html_item = f'<li><span>{col}:</span><span>{value}</span></li>'
         html_items.append(html_item)
-    return '\n'.join(html_items)
+    existing_description = row['description']
+    new_description = existing_description + '\n' + '\n'.join(
+        html_items) if existing_description else '\n'.join(html_items)
+    return new_description
 
-  dataframe['description'] = dataframe[columns].apply(safe_join, axis=1)
+  dataframe['description'] = dataframe.apply(safe_join, axis=1)
 
 
-combine_columns(kaminopt_df, columns_to_include)
+combine_columns(data_df, columns_to_include)
 
 vectorizer = TfidfVectorizer()
-tfidf_matrix = vectorizer.fit_transform(kaminopt_df['description'])
+tfidf_matrix = vectorizer.fit_transform(data_df['description'])
 
 valid_columns_to_exclude = [
-    col for col in columns_to_exclude if col in kaminopt_df.columns
+    col for col in columns_to_exclude if col in data_df.columns
 ]
 
-result_df = kaminopt_df[['description'] + valid_columns_to_exclude]
-result_df.to_csv('kaminopt_modified.csv',
-                 sep=';',
-                 encoding=kaminopt_encoding,
-                 index=False)
+result_df = data_df[['description'] + valid_columns_to_exclude]
+base_name = os.path.splitext(os.path.basename(data_file_path))[0]
+output_file_path = f"{base_name}_modified.csv"
+result_df.to_csv(output_file_path, sep=';', encoding='utf-8-sig', index=False)
 
-print("Файл успешно изменен и сохранен под именем 'kaminopt_modified.csv'")
+print(f"File successfully modified and saved as '{output_file_path}'")
