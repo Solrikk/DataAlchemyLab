@@ -1,4 +1,4 @@
-![Logo](https://github.com/Solrikk/CSV Data Description Enhancer/blob/main/assets/result/images/orb6.png)
+![Logo](https://github.com/Solrikk/Pic/blob/main/assets/result/images/orb6.png)
 
 <div align="center">
   <h3>
